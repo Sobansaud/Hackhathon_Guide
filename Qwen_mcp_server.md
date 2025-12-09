@@ -32,11 +32,11 @@ If this folder/file does not exist, create it.
         "Authorization": "Bearer $GITHUB_MCP_PAT"
       }
     },
-     "context7": {
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp",
+      "context7": {
+      "httpUrl": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "YOUR_API_KEY"
+        "CONTEXT7_API_KEY": "YOUR_API_KEY",
+        "Accept": "application/json, text/event-stream"
       }
     }
   }
@@ -106,11 +106,11 @@ qwen mcp list
         "Authorization": "Bearer $GITHUB_MCP_PAT"
       }
     },
-     "context7": {
-      "type": "http",
-      "url": "https://mcp.context7.com/mcp",
+      "context7": {
+      "httpUrl": "https://mcp.context7.com/mcp",
       "headers": {
-        "CONTEXT7_API_KEY": "YOUR_API_KEY"
+        "CONTEXT7_API_KEY": "YOUR_API_KEY",
+        "Accept": "application/json, text/event-stream"
       }
     }
   }
