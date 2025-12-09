@@ -24,7 +24,7 @@ If this folder/file does not exist, create it.
 ## 📌 2. Add MCP Servers in `.qwen/settings.json`
 
 ``` json
-{
+
   "mcpServers": {
     "github": {
       "httpUrl": "https://api.githubcopilot.com/mcp/",
@@ -40,7 +40,7 @@ If this folder/file does not exist, create it.
       }
     }
   }
-}
+
 ```
 
 ------------------------------------------------------------------------
