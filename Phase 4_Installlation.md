@@ -1,4 +1,4 @@
-# 🚀 Hackathon 2 – Phase IV
+`# 🚀 Hackathon 2 – Phase IV
 
 ## DevOps & Kubernetes Tools Installation Guide
 
@@ -56,11 +56,16 @@ if %errorLevel% neq 0 (
 )
 
 echo [2/7] Installing Chocolatey...
-choco --version >nul 2>&1 || (
-    powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
-    pause
-    exit /b
-)
+if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
+    Write-Host "Chocolatey not found - Installing now..."
+    Set-ExecutionPolicy Bypass -Scope Process -Force
+    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+    iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    Write-Host "Chocolatey installed! Restart PowerShell to use choco."
+} else {
+    Write-Host "Chocolatey already installed. Version:"
+    choco --version
+}
 
 echo [3/7] Docker Desktop (Manual)
 echo Download from:
