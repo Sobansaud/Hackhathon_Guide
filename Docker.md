@@ -75,7 +75,7 @@ docker login
 ## 🏗️ Step 4: Build Next.js Docker Image
 
 ```bash
-docker build -t sobansaud121/nextjs_website .
+docker build -t sobansaud121/todo_frontend .
 ```
 
 ---
@@ -83,7 +83,7 @@ docker build -t sobansaud121/nextjs_website .
 ## ▶️ Step 5: Run Next.js Container
 
 ```bash
-docker run -p 3000:3000 sobansaud121/nextjs_website
+docker run -p 3000:3000 sobansaud121/todo_frontend
 ```
 
 ---
@@ -91,7 +91,7 @@ docker run -p 3000:3000 sobansaud121/nextjs_website
 ## ⬆️ Step 6: Push Next.js Image to Docker Hub
 
 ```bash
-docker push sobansaud121/nextjs_website
+docker push sobansaud121/todo_frontend
 ```
 
 ---
@@ -143,7 +143,7 @@ http://localhost:8000
 ## 🐳 Step 3: Create Dockerfile for FastAPI
 
 ```dockerfile
-FROM python:3.10-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
@@ -163,7 +163,7 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ## 🏗️ Step 4: Build FastAPI Docker Image
 
 ```bash
-docker build -t sobansaud121/fastapi_backend .
+docker build -t sobansaud121/todo_backend .
 ```
 
 ---
@@ -171,7 +171,7 @@ docker build -t sobansaud121/fastapi_backend .
 ## ▶️ Step 5: Run FastAPI Container
 
 ```bash
-docker run -p 8000:8000 sobansaud121/fastapi_backend
+docker run -p 8000:8000 sobansaud121/todo_backend
 ```
 
 ---
@@ -179,7 +179,7 @@ docker run -p 8000:8000 sobansaud121/fastapi_backend
 ## ⬆️ Step 6: Push FastAPI Image to Docker Hub
 
 ```bash
-docker push sobansaud121/fastapi_backend
+docker push sobansaud121/todo_backend
 ```
 
 ---
@@ -187,8 +187,8 @@ docker push sobansaud121/fastapi_backend
 # 🔗 OPTIONAL: Run Both Containers Together
 
 ```bash
-docker run -d -p 3000:3000 sobansaud121/nextjs_website
-docker run -d -p 8000:8000 sobansaud121/fastapi_backend
+docker run -d -p 3000:3000 sobansaud121/todo_website
+docker run -d -p 8000:8000 sobansaud121/todo_backend
 ```
 
 ---
