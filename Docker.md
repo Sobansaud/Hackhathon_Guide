@@ -1,22 +1,26 @@
 
-### CODEVERSE SOBAN 
-# 🚀 Next.js Application → Docker Image → Docker Hub (Step by Step)
+### CODEVERSE SOBAN
+# 🚀 Next.js & FastAPI Applications → Docker Image → Docker Hub (Step by Step)
 
-
-In this Video :-
-1. Create a Next.js application  
-2. Build a Docker image  
-3. Push the image to Docker Hub  
-4. Run the application using Docker  
+In this Guide / Video you will learn:
+1. Create a Next.js application
+2. Dockerize a Next.js application
+3. Create a FastAPI backend
+4. Dockerize a FastAPI application
+5. Push Docker images to Docker Hub
+6. Run both applications using Docker
 
 ---
 
 ## ✅ Prerequisites
 - Node.js installed
+- Python 3.9+ installed
 - Docker Desktop installed and running
 - Docker Hub account
 
 ---
+
+# 🌐 PART 1: Next.js Application with Docker
 
 ## 📁 Step 1: Create a Next.js Application
 
@@ -25,7 +29,7 @@ npx create-next-app@latest nextjs-app
 cd nextjs-app
 ```
 
-Run the project locally to verify:
+Run locally:
 
 ```bash
 npm run dev
@@ -38,9 +42,7 @@ http://localhost:3000
 
 ---
 
-## 🐳 Step 2: Create a Dockerfile
-
-Create a file named `Dockerfile` in the project root:
+## 🐳 Step 2: Create Dockerfile for Next.js
 
 ```dockerfile
 FROM node:18-alpine
@@ -68,11 +70,9 @@ CMD ["npm", "start"]
 docker login
 ```
 
-Enter your Docker Hub username and password.
-
 ---
 
-## 🏗️ Step 4: Build the Docker Image
+## 🏗️ Step 4: Build Next.js Docker Image
 
 ```bash
 docker build -t sobansaud121/nextjs_website .
@@ -80,29 +80,15 @@ docker build -t sobansaud121/nextjs_website .
 
 ---
 
-## ▶️ Step 5: Run the Docker Container
+## ▶️ Step 5: Run Next.js Container
 
 ```bash
 docker run -p 3000:3000 sobansaud121/nextjs_website
 ```
 
-Open in browser:
-```
-http://localhost:3000
-```
-
 ---
 
-## ☁️ Step 6: Create Repository on Docker Hub
-
-On Docker Hub:
-- Repository Name: `nextjs_website`
-- Owner: `sobansaud121`
-- Visibility: Public
-
----
-
-## ⬆️ Step 7: Push Image to Docker Hub
+## ⬆️ Step 6: Push Next.js Image to Docker Hub
 
 ```bash
 docker push sobansaud121/nextjs_website
@@ -110,23 +96,113 @@ docker push sobansaud121/nextjs_website
 
 ---
 
-## ⬇️ Step 8: Pull and Run Image from Docker Hub
+# ⚡ PART 2: FastAPI Application with Docker
+
+## 📁 Step 1: Create FastAPI Project
 
 ```bash
-docker pull sobansaud121/nextjs_website
-docker run -p 3000:3000 sobansaud121/nextjs_website
+mkdir fastapi-app
+cd fastapi-app
+```
+
+Create `main.py`:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello from FastAPI with Docker"}
+```
+
+Create `requirements.txt`:
+
+```txt
+fastapi
+uvicorn
+```
+
+---
+
+## ▶️ Step 2: Run FastAPI Locally (Optional)
+
+```bash
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+Open in browser:
+```
+http://localhost:8000
+```
+
+---
+
+## 🐳 Step 3: Create Dockerfile for FastAPI
+
+```dockerfile
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+```
+
+---
+
+## 🏗️ Step 4: Build FastAPI Docker Image
+
+```bash
+docker build -t sobansaud121/fastapi_backend .
+```
+
+---
+
+## ▶️ Step 5: Run FastAPI Container
+
+```bash
+docker run -p 8000:8000 sobansaud121/fastapi_backend
+```
+
+---
+
+## ⬆️ Step 6: Push FastAPI Image to Docker Hub
+
+```bash
+docker push sobansaud121/fastapi_backend
+```
+
+---
+
+# 🔗 OPTIONAL: Run Both Containers Together
+
+```bash
+docker run -d -p 3000:3000 sobansaud121/nextjs_website
+docker run -d -p 8000:8000 sobansaud121/fastapi_backend
 ```
 
 ---
 
 ## 🎉 Done!
-Your **Next.js application is now running using Docker** 🚀
+Your **Next.js Frontend & FastAPI Backend** are now running using Docker 🚀
 
 ---
 
 ## ❤️ Support the Channel
 
-**CodeVerse Soban**  
+**CodeVerse Soban**
 👍 Like the video  
 🔁 Share with others  
 🔔 Subscribe for more content  
+
+CODEVERSE – Learn • Build • Deploy
